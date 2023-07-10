@@ -1,14 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db')
+const categoriesQueries = require('../queries/categories')
 
-const findOne = id => {
-  return (query = {
-    name: 'fetch-category',
-    text: 'SELECT * FROM categories WHERE id = $1',
-    values: [Number(id)]
-  })
-}
 // "BUSCAR"
 router.get('/', (req, res) => {
   try {
@@ -62,7 +56,7 @@ router.delete('/:id', async (req, res) => {
       return res.status(400).json({ error: 'Param id is mandatory.' })
     }
 
-    const query = findOne(id)
+    const query = categoriesQueries.findById(id)
     const category = await db.query(query)
     if (!category.rows[0]) {
       return res.status(404).json({ error: 'Category not found' })
@@ -97,7 +91,7 @@ router.put('/:id', async (req, res) => {
         .json({ error: 'Nome tem que ter mais de 3 caracteres.' })
     }
 
-    const query = findOne(id)
+    const query = categoriesQueries.findById(id)
     const category = await db.query(query)
     if (!category.rows[0]) {
       return res.status(404).json({ error: 'Category not found' })
