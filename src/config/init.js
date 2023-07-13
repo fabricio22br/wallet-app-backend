@@ -3,6 +3,7 @@ const tablesQueries = require('../queries/tables')
 
 const init = async () => {
   try {
+    await db.query(tablesQueries.createDatabase())
     await db.query(tablesQueries.createUsers())
     await db.query(tablesQueries.createCategories())
     await db.query(tablesQueries.createFinances())
