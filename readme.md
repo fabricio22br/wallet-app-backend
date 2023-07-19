@@ -1,4 +1,4 @@
-# Wallet Ap API (Back-end)
+# Wallet App API (Back-end)
 
 ## Intro
 
